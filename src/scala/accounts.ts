@@ -1,7 +1,8 @@
 export const scalaRelatedOrganizationProfiles = [
-    "did:plc:mb6e2ashxeswusv7f7hwusp5", // scala-lang.org https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=scala-lang.org
-    "did:plc:5nlshbn5adh3fjwzyz7xjpwl", // Scala Space    https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=scalaspace.bsky.social
-    "did:plc:xs35x5l4ogj3g4eymh6ngcsr", // Scala Times    https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=scalatimes.com
-    "did:plc:lc3vnztamcatgyfeaexhmieq", // scala-js.org   https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=scala-js.org
-    "did:plc:qy6stkf5yoslvj2vfkmn5bcs", // IntelliJ Scala https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=scala.intellijidea.com
+    "did:plc:egg2e54oxbcaqxzrvnmsuw7a", // https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=mjecsmap.bsky.social
+    "did:plc:lgeeinnb4wkxgpd6ubsdnzh5", // https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=tiagoventura.bsky.social
+    "did:plc:chmlnrppp2b4m5su5ejcl43p", //https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=cbarrie.bsky.social
+    "did:plc:7lfvbapvw5exazsv7hlzvzgh", //https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=jatucker.bsky.social
+    "did:plc:vuvsifrusnjsys7mhkpk662u", //https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=benguinaudeau.bsky.social
+    "did:plc:jxizeknbi7lgfye4jylypraz", //https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=solmg.bsky.social
 ]
