@@ -1,8 +1,6 @@
-# Scala feed generator for Bluesky
+# Feed generator for Bluesky
 
 This repository is a customized fork of https://github.com/bluesky-social/feed-generator
-
-Want to be up to date with Scala news on Bluesky? Just follow the feed at https://bsky.app/profile/michal.pawlik.dev/feed/scala-feed
 
 # Implementation details
 
@@ -12,8 +10,8 @@ The [FirehoseSubscription.ts](src/FirehoseSubscription.ts) is a class that colle
 
 ## Content filtering
 
-The `isAboutScala` function defined in [src/scala/index.ts](src/scala/index.ts) decides if content should be saved to database. 
+The `isPolitical` function defined in [src/bridging/index.ts](src/bridging/index.ts) decides if content should be saved to database. 
 
 ## Feed generation algorithm
 
-You can find the algorithm generating the feed in [src/algos/scala-feed.ts](src/algos/scala-feed.ts). It simply fetches all known records from database sorted by indexing time, there's no sophisticated logic involved.
+You can find the algorithm generating the feed in [src/algos/bridging-feed.ts](src/algos/bridging-feed.ts). It simply fetches all known records from database sorted by indexing time, there's no sophisticated logic involved.
