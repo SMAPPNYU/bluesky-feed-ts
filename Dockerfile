@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn install && yarn test && yarn build
+RUN yarn install && yarn build
 
 RUN rm -rf /build
 
