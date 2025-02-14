@@ -12,7 +12,5 @@ function hashTag(word: String) {
 }
 
 export const allHashTags =
-    scalalang.concat(typelevel,
-        politics,
-        media
+    politics.concat(media
     ).map(w => hashTag(w))

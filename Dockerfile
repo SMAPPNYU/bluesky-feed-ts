@@ -4,6 +4,11 @@ WORKDIR /app
 
 COPY . .
 
+# Only copy .env if it exists (avoids build failures)
+#COPY .env . || echo "No .env file found, continuing..."
+
+COPY .env .
+
 RUN yarn install && yarn build
 
 RUN rm -rf /build
