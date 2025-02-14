@@ -22,12 +22,12 @@ ENV FEEDGEN_PORT=3000
 # Change this to use a different bind address
 ENV FEEDGEN_LISTENHOST="0.0.0.0"
 # Set to something like db.sqlite to store persistently
-ENV FEEDGEN_SQLITE_LOCATION="/data/db.sqlite"
+ENV FEEDGEN_SQLITE_LOCATION="/mnt/nvme1n1/db.sqlite"
 # FEEDGEN_SQLITE_LOCATION=":memory:"
 # Don't change unless you're working in a different environment than the primary Bluesky network
 ENV FEEDGEN_SUBSCRIPTION_ENDPOINT="wss://bsky.network"
 #hostname we will run service at 
-ENV FEEDGEN_HOSTNAME="ec2-34-202-236-64.compute-1.amazonaws.com"
+ENV FEEDGEN_HOSTNAME="bridging-algo-bluesky.csmapnyuapps.org"
 # DID of one of the developer accounts
 ENV FEEDGEN_PUBLISHER_DID="did:plc:itd44pixnah6bg4ktopdnzjd"
 # Only use this if you want a service did different from did:web

@@ -58,12 +58,15 @@ const run = async () => {
     ])
 
   const { handle, password, recordName, displayName, description, avatar, service } = answers
-
+  //const { handle, password, service } = answers;
   const feedGenDid =
     process.env.FEEDGEN_SERVICE_DID ?? `did:web:${process.env.FEEDGEN_HOSTNAME}`
 
   // only update this if in a test environment
   const agent = new AtpAgent({ service: service ? service : 'https://bsky.social' })
+  console.log("🔍 Logging in with PDS:", service);
+  console.log("Logging in with:", handle, password);
+  console.log("Logging in with:", { identifier: handle, password });
   await agent.login({ identifier: handle, password})
 
   let avatarRef: BlobRef | undefined

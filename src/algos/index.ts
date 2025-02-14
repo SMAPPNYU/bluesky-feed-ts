@@ -3,12 +3,12 @@ import {
   QueryParams,
   OutputSchema as AlgoOutput,
 } from '../lexicon/types/app/bsky/feed/getFeedSkeleton'
-import * as scalaFeed from './scala-feed'
+import * as csmapFeed from './csmap-feed'
 
 type AlgoHandler = (ctx: AppContext, params: QueryParams) => Promise<AlgoOutput>
 
 const algos: Record<string, AlgoHandler> = {
-  [scalaFeed.shortname]: scalaFeed.handler,
+  [csmapFeed.shortname]: csmapFeed.handler,
 }
 
 export default algos

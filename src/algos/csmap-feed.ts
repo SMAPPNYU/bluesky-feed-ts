@@ -2,7 +2,7 @@ import { QueryParams } from '../lexicon/types/app/bsky/feed/getFeedSkeleton'
 import { AppContext } from '../config'
 
 // max 15 chars
-export const shortname = 'scala-feed'
+export const shortname = 'csmap-feed'
 
 // not much of an algorithm, it just fetches the ids from db and returns them to user
 export const handler = async (ctx: AppContext, params: QueryParams) => {
