@@ -42,7 +42,15 @@ export class FeedGenerator {
       didCache,
     })
 
-    const server = createServer({ ... })
+    const server = createServer({
+  validateResponse: true,
+  payload: {
+    jsonLimit: 100 * 1024, // 100kb
+    textLimit: 100 * 1024, // 100kb
+    blobLimit: 5 * 1024 * 1024, // 5mb
+  },
+})
+
     const ctx: AppContext = { db, didResolver, cfg }
     feedGeneration(server, ctx)
     describeGenerator(server, ctx)
