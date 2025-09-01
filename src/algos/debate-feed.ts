@@ -2,18 +2,18 @@ import { QueryParams } from '../lexicon/types/app/bsky/feed/getFeedSkeleton'
 import { AppContext } from '../config'
 import fs from 'fs'
 import path from 'path'
-import csvParse from 'csv-parse/sync'
+import { parse } from 'csv-parse/sync'
 
 // max 15 chars
 export const shortname = 'debate-feed'
 
-export const handler = async (ctx: AppContext, params: QueryParams) => {
+export default async function debateFeed(ctx: AppContext, params: QueryParams) {
   // Path to your CSV
   const csvPath = path.join(process.cwd(), 'data', 'Posts_with_Phi_8292025.csv')
 
   // Read and parse CSV
   const csvContent = fs.readFileSync(csvPath, 'utf-8')
-  const records = csvParse.parse(csvContent, {
+  const records = parse(csvContent, {
     columns: true,   // use headers
     skip_empty_lines: true,
   })
@@ -30,7 +30,7 @@ export const handler = async (ctx: AppContext, params: QueryParams) => {
     }
   }
 
-  const slice = uris.slice(start, start + params.limit)
+  const slice = uris.slice(start, start + (params.limit ?? 50))
 
   // Construct feed response
   const feed = slice.map((uri) => ({ post: uri }))
