@@ -6,7 +6,7 @@ import { createServer } from './lexicon'
 import feedGeneration from './methods/feed-generation'
 import describeGenerator from './methods/describe-generator'
 import { createDb, Database, migrateToLatest } from './db'
-import { FirehoseSubscription } from './FirehoseSubscription'
+// import { FirehoseSubscription } from './FirehoseSubscription' // 🔕 disabled for now
 import { AppContext, Config } from './config'
 import wellKnown from './well-known'
 
@@ -14,18 +14,12 @@ export class FeedGenerator {
   public app: express.Application
   public server?: http.Server
   public db: Database
-  public firehose: FirehoseSubscription
+  // public firehose: FirehoseSubscription // 🔕 disabled
   public cfg: Config
 
-  constructor(
-    app: express.Application,
-    db: Database,
-    firehose: FirehoseSubscription,
-    cfg: Config,
-  ) {
+  constructor(app: express.Application, db: Database, cfg: Config) {
     this.app = app
     this.db = db
-    this.firehose = firehose
     this.cfg = cfg
   }
 
@@ -33,7 +27,7 @@ export class FeedGenerator {
     const app = express()
     const db = createDb(cfg.sqliteLocation)
 
-    // ⛔ disable firehose for now
+    // 🔕 disable firehose for now
     // const firehose = new FirehoseSubscription(db, cfg.subscriptionEndpoint)
 
     const didCache = new MemoryCache()
@@ -43,31 +37,38 @@ export class FeedGenerator {
     })
 
     const server = createServer({
-  validateResponse: true,
-  payload: {
-    jsonLimit: 100 * 1024, // 100kb
-    textLimit: 100 * 1024, // 100kb
-    blobLimit: 5 * 1024 * 1024, // 5mb
-  },
-})
+      validateResponse: true,
+      payload: {
+        jsonLimit: 100 * 1024, // 100kb
+        textLimit: 100 * 1024, // 100kb
+        blobLimit: 5 * 1024 * 1024, // 5mb
+      },
+    })
 
-    const ctx: AppContext = { db, didResolver, cfg }
+    const ctx: AppContext = {
+      db,
+      didResolver,
+      cfg,
+    }
+
     feedGeneration(server, ctx)
     describeGenerator(server, ctx)
+
     app.use(server.xrpc.router)
     app.use(wellKnown(ctx))
 
-    // return FeedGenerator(app, db, firehose, cfg)
-    return new FeedGenerator(app, db, null as any, cfg) // 👈 hack in null
+    // return new FeedGenerator(app, db, firehose, cfg)
+    return new FeedGenerator(app, db, cfg)
   }
 
   async start(): Promise<http.Server> {
     await migrateToLatest(this.db)
-    // ⛔ disable firehose runner
+    // 🔕 disable firehose runner
     // this.firehose.run(this.cfg.subscriptionReconnectDelay)
     this.server = this.app.listen(this.cfg.port, this.cfg.listenhost)
     await events.once(this.server, 'listening')
     return this.server
   }
+}
 
 export default FeedGenerator
