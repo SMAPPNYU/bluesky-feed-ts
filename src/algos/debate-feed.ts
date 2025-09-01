@@ -9,7 +9,7 @@ export const shortname = 'debate-feed'
 
 export const handler = async (ctx: AppContext, params: QueryParams) => {
   // Path to your CSV
-  const csvPath = path.join(process.cwd(), 'data', 'feed_debate_filtered.csv')
+  const csvPath = path.join(process.cwd(), 'data', 'Posts_with_Phi_8292025.csv')
 
   // Read and parse CSV
   const csvContent = fs.readFileSync(csvPath, 'utf-8')
