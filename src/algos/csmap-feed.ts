@@ -8,7 +8,7 @@ import { parse } from 'csv-parse/sync'
 export const shortname = 'csmap-feed'
 
 export const handler = async (ctx: AppContext, params: QueryParams) => {
-  const csvPath = path.join(process.cwd(), 'data', 'Posts_with_Phi_8292025.csv')
+  const csvPath = path.join(process.cwd(), 'data', 'Posts_reranked_8292025.csv')
 
   const csvContent = fs.readFileSync(csvPath, 'utf-8')
   const records = parse(csvContent, {
