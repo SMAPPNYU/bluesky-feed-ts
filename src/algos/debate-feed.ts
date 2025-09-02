@@ -7,21 +7,17 @@ import { parse } from 'csv-parse/sync'
 // max 15 chars
 export const shortname = 'debate-feed'
 
-export default async function debateFeed(ctx: AppContext, params: QueryParams) {
-  // Path to your CSV
+export const handler = async (ctx: AppContext, params: QueryParams) => {
   const csvPath = path.join(process.cwd(), 'data', 'Posts_with_Phi_8292025.csv')
 
-  // Read and parse CSV
   const csvContent = fs.readFileSync(csvPath, 'utf-8')
   const records = parse(csvContent, {
-    columns: true,   // use headers
+    columns: true,
     skip_empty_lines: true,
   })
 
-  // Extract URIs in the order they appear
   const uris = records.map((row: any) => row.uri).filter(Boolean)
 
-  // Apply pagination (limit + cursor)
   let start = 0
   if (params.cursor) {
     const cursorIndex = uris.indexOf(params.cursor)
@@ -30,12 +26,8 @@ export default async function debateFeed(ctx: AppContext, params: QueryParams) {
     }
   }
 
-  const slice = uris.slice(start, start + (params.limit ?? 50))
-
-  // Construct feed response
+  const slice = uris.slice(start, start + params.limit)
   const feed = slice.map((uri) => ({ post: uri }))
-
-  // New cursor is just the last URI we sent
   const cursor = slice.length > 0 ? slice[slice.length - 1] : undefined
 
   return {
