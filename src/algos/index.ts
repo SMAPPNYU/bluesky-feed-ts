@@ -6,15 +6,13 @@ import {
 
 // Existing feed
 import * as csmapFeed from './csmap-feed'
-
-// New debate feed
-import debateFeed, { shortname as debateShortname } from './debate-feed'
+import * as debateFeed from './debate-feed'   // <-- this is enough
 
 type AlgoHandler = (ctx: AppContext, params: QueryParams) => Promise<AlgoOutput>
 
 const algos: Record<string, AlgoHandler> = {
   [csmapFeed.shortname]: csmapFeed.handler,
-  [debateShortname]: debateFeed,   // 👈 add your new one
+  [debateFeed.shortname]: debateFeed.handler,   // <-- consistent with csmap
 }
 
 export default algos
